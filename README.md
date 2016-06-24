@@ -1,8 +1,8 @@
-## ngIRCd
+## MiniDLNA
 
-Next Generation IRC Daemon
+MiniDLNA is a simple media server software, with the aim of being fully compliant with DLNA/UPnP-AV clients.
 
-## ngIRCd Docker Images
+## MiniDLNA Docker Images
 
 This image is based on Alpine Linux.
 
@@ -10,18 +10,24 @@ This image is based on Alpine Linux.
 
 Example:
 
-    docker run -d --name ngircd -p 6667:6667 geekduck/ngircd
+    docker run -d --name minidlna \
+      --net=host \
+      -p 8200:8200 \
+      -p 1900:1900/udp \
+      -v <PATH_TO_MUSIC_DIR>:/opt/Music \
+      -v <PATH_TO_VIDEOS_DIR>:/opt/Videos \
+      -v <PATH_TO_PICUTRES_DIR>:/opt/Pictures \
+      geekduck/minidlna
 
 
-If you want to change server name:
+If you want to overwrite a config file:
 
-    docker run -d --name ngircd -p 6667:6667 ngircd geekduck/ngircd --server-name irc.example.co.jp
-
-
-If you want to overwrite config files:
-
-    docker run -d --name ngircd \
-      -p 6667:6667 \
-      -v <PATH_TO_CONFIG_FILE>/ngircd.conf:/etc/ngircd/ngircd.conf:ro \
-      -v <PATH_TO_CONFIG_FILE>/ngircd.motd:/etc/ngircd/ngircd.motd:ro \
-      geekduck/ngircd
+    docker run -d --name minidlna \
+      --net=host \
+      -p 8200:8200 \
+      -p 1900:1900/udp \
+      -v <PATH_TO_MUSIC_DIR>:/opt/Music \
+      -v <PATH_TO_VIDEOS_DIR>:/opt/Videos \
+      -v <PATH_TO_PICUTRES_DIR>:/opt/Pictures \
+      -v <PATH_TO_CONFIG_DIR>/minidlna.conf:/etc/minidlna.conf \
+      geekduck/minidlna
