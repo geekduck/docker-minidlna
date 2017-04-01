@@ -10,4 +10,4 @@ ADD minidlna.conf /etc/minidlna.conf
 EXPOSE 1900/udp
 EXPOSE 8200
 
-ENTRYPOINT [ "/usr/sbin/minidlnad", "-d" ]
+ENTRYPOINT [ "/usr/sbin/minidlnad", "-S" ]
